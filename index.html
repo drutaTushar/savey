@@ -13,31 +13,29 @@
     <input type="text" id="title" placeholder="Title" />
     <button type="submit">Save</button>
   </form>
-  <script type="module">
-    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+    <script type="module">
+      import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+      import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';
 
-    const SUPABASE_URL = 'https://your-project.supabase.co';
-    const SUPABASE_ANON_KEY = 'public-anon-key';
+      const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const form = document.getElementById('bookmark-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const url = document.getElementById('url').value;
+        const title = document.getElementById('title').value;
+        const { error } = await supabase.from('bookmarks').insert({ url, title });
+        if (error) {
+          alert('Error saving bookmark: ' + error.message);
+        } else {
+          form.reset();
+          alert('Saved!');
+        }
+      });
 
-    const form = document.getElementById('bookmark-form');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const url = document.getElementById('url').value;
-      const title = document.getElementById('title').value;
-      const { error } = await supabase.from('bookmarks').insert({ url, title });
-      if (error) {
-        alert('Error saving bookmark: ' + error.message);
-      } else {
-        form.reset();
-        alert('Saved!');
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js', { type: 'module' });
       }
-    });
-
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js');
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>
