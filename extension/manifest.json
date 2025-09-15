@@ -5,7 +5,8 @@
   "description": "Save bookmarks to Supabase",
   "permissions": ["contextMenus", "activeTab"],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "action": {
     "default_title": "Save page to Savey"

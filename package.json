@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "echo 'No tests'"
+    "test": "echo 'No tests'",
+    "build": "node build.js"
   }
 }

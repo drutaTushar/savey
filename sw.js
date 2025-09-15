@@ -1,5 +1,4 @@
-const SUPABASE_URL = 'https://your-project.supabase.co';
-const SUPABASE_ANON_KEY = 'public-anon-key';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';
 
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', (event) => event.waitUntil(self.clients.claim()));

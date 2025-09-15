@@ -1,5 +1,4 @@
-const SUPABASE_URL = 'https://your-project.supabase.co';
-const SUPABASE_ANON_KEY = 'public-anon-key';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';
 
 browser.runtime.onInstalled.addListener(() => {
   browser.contextMenus.create({
